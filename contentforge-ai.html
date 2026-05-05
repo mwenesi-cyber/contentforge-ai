@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ContentForge AI — Social Media Content for Nairobi Businesses</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --black: #0B0B0B;
+    --orange: #FF6B00;
+    --orange-light: #FF8C33;
+    --orange-dark: #CC5500;
+    --white: #FFFFFF;
+    --gray-light: #F5F5F5;
+    --gray-mid: #999;
+    --gray-dark: #222;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.35;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 6vw;
+    background: rgba(11,11,11,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,107,0,0.12);
+  }
+
+  .logo {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 20px;
+    letter-spacing: -0.5px;
+    color: var(--white);
+    text-decoration: none;
+  }
+
+  .logo span { color: var(--orange); }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--orange); }
+
+  .nav-cta {
+    background: var(--orange);
+    color: var(--black) !important;
+    padding: 9px 22px;
+    border-radius: 4px;
+    font-weight: 700 !important;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--orange-light) !important; color: var(--black) !important; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 6vw 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-glow {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(255,107,0,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,107,0,0.1);
+    border: 1px solid rgba(255,107,0,0.3);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 28px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero-badge::before {
+    content: '⚡';
+    font-size: 14px;
+  }
+
+  h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: clamp(38px, 6vw, 72px);
+    line-height: 1.05;
+    letter-spacing: -2px;
+    max-width: 840px;
+    margin-bottom: 24px;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  h1 em {
+    font-style: normal;
+    color: var(--orange);
+    position: relative;
+  }
+
+  h1 em::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0; right: 0;
+    height: 3px;
+    background: var(--orange);
+    border-radius: 2px;
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: underlineGrow 0.8s 0.8s ease forwards;
+  }
+
+  @keyframes underlineGrow { to { transform: scaleX(1); } }
+
+  .hero-sub {
+    font-size: 18px;
+    color: rgba(255,255,255,0.6);
+    max-width: 540px;
+    margin-bottom: 44px;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .btn-primary {
+    background: var(--orange);
+    color: var(--black);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 16px 36px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover {
+    background: var(--orange-light);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(255,107,0,0.35);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--white);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 15px 36px;
+    border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.2);
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--orange);
+    color: var(--orange);
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 48px;
+    margin-top: 72px;
+    animation: fadeUp 0.6s 0.4s ease both;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 40px;
+  }
+
+  .stat-item { text-align: center; }
+  .stat-num {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 32px;
+    color: var(--orange);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    padding: 96px 6vw;
+    position: relative;
+  }
+
+  .section-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 14px;
+  }
+
+  h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: clamp(28px, 4vw, 48px);
+    line-height: 1.1;
+    letter-spacing: -1px;
+    max-width: 600px;
+    margin-bottom: 20px;
+  }
+
+  h2 span { color: var(--orange); }
+
+  .section-desc {
+    color: rgba(255,255,255,0.55);
+    max-width: 500px;
+    margin-bottom: 56px;
+    font-size: 17px;
+  }
+
+  /* ── SERVICES ── */
+  #services { background: rgba(255,255,255,0.02); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .service-card {
+    background: var(--black);
+    padding: 36px 32px;
+    transition: background 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--orange);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+
+  .service-card:hover { background: rgba(255,107,0,0.04); }
+  .service-card:hover::before { transform: scaleX(1); }
+
+  .service-icon {
+    font-size: 28px;
+    margin-bottom: 18px;
+    display: block;
+  }
+
+  .service-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 10px;
+    letter-spacing: -0.3px;
+  }
+
+  .service-desc {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.6;
+  }
+
+  /* ── SAMPLE POSTS ── */
+  #posts { background: var(--black); }
+
+  .posts-scroll {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding-bottom: 20px;
+    scrollbar-width: none;
+  }
+
+  .posts-scroll::-webkit-scrollbar { display: none; }
+
+  .post-card {
+    flex-shrink: 0;
+    width: 240px;
+    background: #111;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+
+  .post-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(255,107,0,0.15);
+  }
+
+  .post-img {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .post-img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.7) 100%);
+  }
+
+  .post-content { padding: 16px; }
+
+  .post-niche {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 8px;
+  }
+
+  .post-caption {
+    font-size: 13px;
+    line-height: 1.55;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 10px;
+  }
+
+  .post-tags {
+    font-size: 11px;
+    color: rgba(255,107,0,0.6);
+    line-height: 1.6;
+  }
+
+  /* ── PROMPTS ── */
+  #prompts { background: rgba(255,255,255,0.02); }
+
+  .prompts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .prompt-card {
+    background: #0e0e0e;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .prompt-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--orange);
+    border-radius: 2px 0 0 2px;
+  }
+
+  .prompt-num {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--orange);
+    opacity: 0.5;
+    margin-bottom: 10px;
+  }
+
+  .prompt-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 12px;
+  }
+
+  .prompt-text {
+    font-family: 'Courier New', monospace;
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.65;
+    background: rgba(255,255,255,0.03);
+    border-radius: 6px;
+    padding: 14px;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .prompt-text em { color: var(--orange); font-style: normal; }
+
+  /* ── PRICING ── */
+  #pricing { background: var(--black); }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    max-width: 900px;
+  }
+
+  .price-card {
+    background: #0e0e0e;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 36px 32px;
+    position: relative;
+    transition: transform 0.25s;
+  }
+
+  .price-card:hover { transform: translateY(-4px); }
+
+  .price-card.featured {
+    border-color: var(--orange);
+    background: rgba(255,107,0,0.04);
+  }
+
+  .featured-badge {
+    position: absolute;
+    top: -1px; right: 24px;
+    background: var(--orange);
+    color: var(--black);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 0 0 6px 6px;
+  }
+
+  .price-tier {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 16px;
+  }
+
+  .price-amount {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 40px;
+    letter-spacing: -1px;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .price-period {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 28px;
+  }
+
+  .price-features {
+    list-style: none;
+    margin-bottom: 32px;
+  }
+
+  .price-features li {
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .price-features li::before {
+    content: '✓';
+    color: var(--orange);
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+
+  /* ── HOW IT WORKS ── */
+  #how { background: rgba(255,255,255,0.02); }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0;
+    position: relative;
+    max-width: 900px;
+  }
+
+  .steps::before {
+    content: '';
+    position: absolute;
+    top: 28px;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--orange), transparent);
+    opacity: 0.3;
+  }
+
+  .step {
+    padding: 0 24px;
+    text-align: center;
+  }
+
+  .step-num {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--orange);
+    color: var(--black);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .step-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+
+  .step-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.6;
+  }
+
+  /* ── CTA ── */
+  #cta {
+    background: var(--orange);
+    text-align: center;
+    padding: 80px 6vw;
+  }
+
+  #cta h2 {
+    color: var(--black);
+    max-width: 680px;
+    margin: 0 auto 20px;
+    font-size: clamp(28px, 4vw, 50px);
+  }
+
+  #cta p {
+    color: rgba(0,0,0,0.6);
+    font-size: 18px;
+    max-width: 480px;
+    margin: 0 auto 40px;
+  }
+
+  .btn-dark {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 18px 44px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+
+  .btn-dark:hover {
+    background: #1a1a1a;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #060606;
+    padding: 48px 6vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .footer-logo {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 18px;
+    color: var(--white);
+  }
+
+  .footer-logo span { color: var(--orange); }
+
+  .footer-copy {
+    font-size: 13px;
+    color: rgba(255,255,255,0.25);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 24px;
+  }
+
+  .footer-links a {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.35);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--orange); }
+
+  /* ── WHATSAPP FLOAT ── */
+  .wa-float {
+    position: fixed;
+    bottom: 28px; right: 28px;
+    width: 56px; height: 56px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+    text-decoration: none;
+    transition: transform 0.2s;
+    font-size: 26px;
+  }
+
+  .wa-float:hover { transform: scale(1.1); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ── DIVIDER ── */
+  .orange-line {
+    width: 48px;
+    height: 3px;
+    background: var(--orange);
+    border-radius: 2px;
+    margin-bottom: 48px;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">Content<span>Forge</span> AI</a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#posts">Samples</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#cta" class="nav-cta">Get Started</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-badge">⚡ AI-Powered Social Media for Nairobi Businesses</div>
+  <h1>Your Brand Deserves <em>Content That Converts</em></h1>
+  <p class="hero-sub">We create high-quality, AI-powered social media content tailored to your Nairobi business — delivered fast, priced fairly.</p>
+  <div class="hero-btns">
+    <a href="#cta" class="btn-primary">Get Your First Package</a>
+    <a href="#posts" class="btn-secondary">See Sample Posts</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-num">10+</div>
+      <div class="stat-label">Posts Per Package</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">24h</div>
+      <div class="stat-label">Turnaround</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">30+</div>
+      <div class="stat-label">Business Niches</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Made for Kenya</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="reveal">
+    <div class="section-label">What We Do</div>
+    <h2>Everything Your Brand <span>Needs</span></h2>
+    <p class="section-desc">From clothing brands to restaurants, we create scroll-stopping content for every Nairobi business type.</p>
+    <div class="orange-line"></div>
+  </div>
+  <div class="services-grid reveal">
+    <div class="service-card">
+      <span class="service-icon">✍️</span>
+      <div class="service-title">Instagram Captions</div>
+      <p class="service-desc">Punchy, engaging captions crafted for Kenyan audiences. Includes relevant local hashtags for maximum reach.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">📅</span>
+      <div class="service-title">30-Day Content Plans</div>
+      <p class="service-desc">A full month of content strategy mapped out — what to post, when, and why. Never run out of ideas again.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🎨</span>
+      <div class="service-title">Canva Post Designs</div>
+      <p class="service-desc">Professionally designed social media graphics ready to post. Branded to match your business colors and style.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🤖</span>
+      <div class="service-title">AI Prompt Packs</div>
+      <p class="service-desc">Powerful AI prompts you can use anytime to generate unlimited content for your business — a one-time purchase.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">📈</span>
+      <div class="service-title">Content Strategy</div>
+      <p class="service-desc">Custom social media strategy tailored to your goals — whether that's sales, awareness, or growing your following.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">💼</span>
+      <div class="service-title">Monthly Packages</div>
+      <p class="service-desc">Ongoing monthly content creation so your pages stay active, consistent, and growing every single month.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SAMPLE POSTS -->
+<section id="posts">
+  <div class="reveal">
+    <div class="section-label">Sample Content</div>
+    <h2>Posts <span>Ready to Sell</span></h2>
+    <p class="section-desc">Real sample content we've created for clothing brands in Nairobi. Scroll to see all 10.</p>
+    <div class="orange-line"></div>
+  </div>
+  <div class="posts-scroll reveal">
+
+    <div class="post-card">
+      <div class="post-img" style="background: linear-gradient(135deg,#1a1a2e,#16213e);">👗</div>
+      <div class="post-content">
+        <div class="post-niche">Clothing Brand</div>
+        <div class="post-caption">Upgrade your wardrobe 🔥 Style that speaks before you do.</div>
+        <div class="post-tags">#NairobiFashion #StreetwearKE #KenyaStyle</div>
+      </div>
+    </div>
+
+    <div class="post-card">
+      <div class="post-img" style="background: linear-gradient(135deg,#2d1b00,#4a2f00);">💯</div>
+      <div class="post-content">
+        <div class="post-niche">Clothing Brand</div>
+        <div class="post-caption">Confidence starts with what you wear. Step out bold 💯</div>
+        <div class="post-tags">#OutfitInspo #NairobiStyle #FashionKenya</div>
+      </div>
+    </div>
+
+    <div class="post-card">
+      <div class="post-img" style="background: linear-gradient(135deg,#1a0a0a,#3a1010);">🚨</div>
+      <div class="post-content">
+        <div class="post-niche">Clothing Brand</div>
+        <div class="post-caption">New drop alert 🚨 Limited pieces available—don't miss out.</div>
+        <div class="post-tags">#NewCollection #KenyanBrands #ShopLocalKE</div>
+      </div>
+    </div>
+
+    <div class="post-card">
+      <div class="post-img" style="background: linear-gradient(135deg,#0a1a0a,#102a10);">✨</div>
+      <div class="post-content">
+        <div class="post-niche">Clothing Brand</div>
+        <div class="post-caption">Simple. Clean. Powerful. That's the look.</div>
+        <div class="post-tags">#MinimalStyle #UrbanFashion #KEFashion</div>
+      </div>
+    </div>
+
+    <div class="post-card">
+      <div class="post-img" style="background: linear-gradient(135deg,#1a1a00,#2a2a10);">🔥</div>
+      <div class="post-content">
+        <div class="post-niche">Clothing Brand</div>
+        <div class="post-caption">Your everyday fit just got better 🔥</div>
+        <div class="post-tags">#DailyOutfit #KenyaFashion #StyleInspo</div>
+      </div>
+    </div>
+
+    <div class="post-card">
+      <div class="post-img" style="background: linear-gradient(135deg,#0a0a1a,#10102a);">🛍️</div>
+      <div class="post-content">
+        <div class="post-niche">Clothing Brand</div>
+        <div class="post-caption">Designed for comfort. Built for style.</div>
+        <div class="post-tags">#ComfortWear #StreetStyleKE #NairobiBrands</div>
+      </div>
+    </div>
+
+    <div class="post-card">
+      <div class="post-img" style="background: linear-gradient(135deg,#1a0a1a,#2a102a);">😉</div>
+      <div class="post-content">
+        <div class="post-niche">Clothing Brand</div>
+        <div class="post-caption">Turn heads without trying 😉</div>
+        <div class="post-tags">#FashionGoals #KenyaTrends #OOTD</div>
+      </div>
+    </div>
+
+    <div class="post-card">
+      <div class="post-img" style="background: linear-gradient(135deg,#1a0a00,#2a1500);">💬</div>
+      <div class="post-content">
+        <div class="post-niche">Clothing Brand</div>
+        <div class="post-caption">Style is a statement—what does yours say?</div>
+        <div class="post-tags">#BoldLooks #KenyanDesigners #Streetwear254</div>
+      </div>
+    </div>
+
+    <div class="post-card">
+      <div class="post-img" style="background: linear-gradient(135deg,#001a0a,#002a12);">🌟</div>
+      <div class="post-content">
+        <div class="post-niche">Clothing Brand</div>
+        <div class="post-caption">Fresh fits. Fresh energy.</div>
+        <div class="post-tags">#NewVibes #KenyaFashionScene #UrbanWear</div>
+      </div>
+    </div>
+
+    <div class="post-card">
+      <div class="post-img" style="background: linear-gradient(135deg,#1a0a00,#FF6B0022);">💥</div>
+      <div class="post-content">
+        <div class="post-niche">Clothing Brand</div>
+        <div class="post-caption">Look good. Feel unstoppable 💥</div>
+        <div class="post-tags">#ConfidenceStyle #NairobiFashion #KEStyle</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROMPTS -->
+<section id="prompts">
+  <div class="reveal">
+    <div class="section-label">AI Prompt Packs</div>
+    <h2>Prompts That <span>Print Results</span></h2>
+    <p class="section-desc">Save these and generate unlimited content for any client in seconds using ChatGPT.</p>
+    <div class="orange-line"></div>
+  </div>
+  <div class="prompts-grid reveal">
+    <div class="prompt-card">
+      <div class="prompt-num">PROMPT 01</div>
+      <div class="prompt-title">Content Generator</div>
+      <div class="prompt-text">Create 10 Instagram posts for a <em>[business type]</em> in Nairobi. Make them engaging, modern, and targeted at young people. Include captions and relevant hashtags. Keep each caption short and catchy.</div>
+    </div>
+    <div class="prompt-card">
+      <div class="prompt-num">PROMPT 02</div>
+      <div class="prompt-title">Premium Captions</div>
+      <div class="prompt-text">Rewrite these captions to sound more premium, persuasive, and emotional. Target audience: young urban Kenyans. Make them feel high-end and trendy.</div>
+    </div>
+    <div class="prompt-card">
+      <div class="prompt-num">PROMPT 03</div>
+      <div class="prompt-title">Content Strategy</div>
+      <div class="prompt-text">Create a 30-day social media content plan for a <em>[business type]</em>. Include what to post each day and the goal of each post (engagement, sales, awareness).</div>
+    </div>
+    <div class="prompt-card">
+      <div class="prompt-num">PROMPT 04</div>
+      <div class="prompt-title">Client Personalization</div>
+      <div class="prompt-text">Based on this business: <em>[PASTE CLIENT INFO]</em> — Create 10 highly targeted Instagram posts that match their brand voice and audience.</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="reveal">
+    <div class="section-label">The Process</div>
+    <h2>Up & Running in <span>24 Hours</span></h2>
+    <p class="section-desc">From first message to first post — it's that simple.</p>
+    <div class="orange-line"></div>
+  </div>
+  <div class="steps reveal">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-title">Tell Us Your Business</div>
+      <p class="step-desc">Share your business type, target audience, and any branding details via WhatsApp or email.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-title">We Create Your Content</div>
+      <p class="step-desc">Our AI-powered system generates 10 custom posts, captions, and hashtags tailored to your brand.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-title">Review & Approve</div>
+      <p class="step-desc">You review the content. We revise until you're 100% happy — no extra charge.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-title">Post & Grow</div>
+      <p class="step-desc">Start posting and watch your engagement grow. Upgrade to monthly packages for consistent results.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="reveal">
+    <div class="section-label">Packages</div>
+    <h2>Simple, <span>Affordable</span> Pricing</h2>
+    <p class="section-desc">Packages designed for Nairobi businesses at every stage.</p>
+    <div class="orange-line"></div>
+  </div>
+  <div class="pricing-grid reveal">
+    <div class="price-card">
+      <div class="price-tier">Starter</div>
+      <div class="price-amount">KSh 1,500</div>
+      <div class="price-period">one-time package</div>
+      <ul class="price-features">
+        <li>10 Instagram captions</li>
+        <li>Relevant hashtags</li>
+        <li>1 business niche</li>
+        <li>Delivered in 24hrs</li>
+        <li>1 free revision</li>
+      </ul>
+      <a href="#cta" class="btn-secondary" style="display:block;text-align:center;">Get Started</a>
+    </div>
+
+    <div class="price-card featured">
+      <div class="featured-badge">Most Popular</div>
+      <div class="price-tier">Growth</div>
+      <div class="price-amount">KSh 4,500</div>
+      <div class="price-period">per month</div>
+      <ul class="price-features">
+        <li>30-day content plan</li>
+        <li>30 captions + hashtags</li>
+        <li>Canva-ready designs</li>
+        <li>Weekly delivery</li>
+        <li>Unlimited revisions</li>
+        <li>AI Prompt Pack included</li>
+      </ul>
+      <a href="#cta" class="btn-primary" style="display:block;text-align:center;">Get Started</a>
+    </div>
+
+    <div class="price-card">
+      <div class="price-tier">Premium</div>
+      <div class="price-amount">KSh 9,000</div>
+      <div class="price-period">per month</div>
+      <ul class="price-features">
+        <li>Everything in Growth</li>
+        <li>2 platforms covered</li>
+        <li>Custom brand strategy</li>
+        <li>Monthly report</li>
+        <li>Priority WhatsApp support</li>
+        <li>Story content included</li>
+      </ul>
+      <a href="#cta" class="btn-secondary" style="display:block;text-align:center;">Get Started</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <h2>Ready to Elevate Your Brand?</h2>
+  <p>Join Nairobi businesses already winning with ContentForge AI. First package ready in 24 hours.</p>
+  <a href="https://wa.me/254700000000?text=Hi!%20I%20want%20content%20for%20my%20business" class="btn-dark">WhatsApp Us Now →</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Content<span>Forge</span> AI</div>
+  <div class="footer-copy">© 2025 ContentForge AI · Nairobi, Kenya · All rights reserved.</div>
+  <div class="footer-links">
+    <a href="#services">Services</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#cta">Contact</a>
+  </div>
+</footer>
+
+<!-- WhatsApp float button -->
+<a class="wa-float" href="https://wa.me/254700000000?text=Hi!%20I%20want%20AI%20content%20for%20my%20business" target="_blank" title="Chat on WhatsApp">💬</a>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        e.target.style.transitionDelay = (i * 0.07) + 's';
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => obs.observe(r));
+
+  // Nav scroll effect
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    nav.style.borderBottomColor = window.scrollY > 40 ? 'rgba(255,107,0,0.22)' : 'rgba(255,107,0,0.12)';
+  });
+</script>
+</body>
+</html>
